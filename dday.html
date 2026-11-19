@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+  body {
+    margin: 0;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background-color: transparent; /* 노션 배경색과 자연스럽게 어울림 */
+  }
+  .timer {
+    display: flex;
+    gap: 12px;
+    text-align: center;
+  }
+  .box {
+    background: #2f3437; /* 박스 색상 (원하는 색으로 변경 가능) */
+    color: #ffffff;      /* 글자 색상 */
+    padding: 14px 18px;
+    border-radius: 10px;
+    min-width: 60px;
+  }
+  .num {
+    font-size: 28px;
+    font-weight: bold;
+  }
+  .label {
+    font-size: 11px;
+    opacity: 0.7;
+    margin-top: 4px;
+    letter-spacing: 1px;
+  }
+</style>
+</head>
+<body>
+
+<div class="timer">
+  <div class="box"><div class="num" id="days">0</div><div class="label">DAYS</div></div>
+  <div class="box"><div class="num" id="hours">0</div><div class="label">HOURS</div></div>
+  <div class="box"><div class="num" id="minutes">0</div><div class="label">MINUTES</div></div>
+  <div class="box"><div class="num" id="seconds">0</div><div class="label">SECONDS</div></div>
+</div>
+
+<script>
+  // ★ 아래 날짜를 원하는 목표 날짜로 수정하세요! (예: Oct 18, 2027 00:00:00)
+  const targetDate = new Date("Oct 18, 2027 00:00:00").getTime();
+
+  setInterval(() => {
+    const now = new Date().getTime();
+    const diff = targetDate - now;
+
+    if (diff <= 0) return;
+
+    document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+    document.getElementById("hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    document.getElementById("minutes").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    document.getElementById("seconds").innerText = Math.floor((diff % (1000 * 60)) / 1000);
+  }, 1000);
+</script>
+
+</body>
+</html>
